@@ -1,110 +1,55 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-
+const capChar = LowToHigh(65, 90)
+const lowChar = LowToHigh(97, 122)
+const numChar = LowToHigh(48, 57)
+const symChar = LowToHigh(33, 47).concat(
+  LowToHigh(58, 64)
+).concat(
+  LowToHigh(91, 96)
+).concat(
+  LowToHigh(123, 126)
+)
 // Write password to the #password input
 function writePassword() {
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
 
     passwordText.value = password;
+};
+generateBtn.addEventListener('click', function(){
+   numChoice = parseInt(prompt("Select a value between 8 and 128"));
+    if (!numChoice){
+        alert("Value must be input");
+    }else if  (numChoice<8 || numChoice>128)
+        alert("Value needs to be between 8 and 128");
+    lowBool = confirm("Do you want lowercase letters?");
+    capBool = confirm("Do you want Capital letters?");  symBool = confirm("Do you want Symbols?");
+    numBool = confirm("Do you want Numbers?");
 
-}
-//attempting to integrate this code:
-const resultEl = document.getElementById('result');
-const lengthEl = document.getElementById('length');
-const uppercaseEl = document.getElementById('uppercase');
-const lowercaseEl = document.getElementById('lowercase');
-const numbersEl = document.getElementById('numbers');
-const symbolsEl = document.getElementById('symbols');
-const generateEl = document.getElementById('generate');
-const clipboard = document.getElementById('clipboard');
+    if (!lowBool && !capBool && !numBool && !symBool)
+    alert("You must select at least one.")
 
-const randomFunc = {
-	lower: getRandomLower,
-	upper: getRandomUpper,
-	number: getRandomNumber,
-	symbol: getRandomSymbol
-}
+    const choiceArray =[];
+    function charArray(){
+     if (lowBool === true){
+        choiceArray.concat(lowChar)
+     } else if (capBool === true){
+        choiceArray.concat(capChar)
+     } else if  (numBool === true){
+        choiceArray.concat(numChar)
+     } else if (symBool === true)
+        choiceArray.concat(symChar)
+    }
 
-clipboard.addEventListener('click', () => {
-	const textarea = document.createElement('textarea');
-	const password = resultEl.innerText;
-	
-	if(!password) { return; }
-	
-	textarea.value = password;
-	document.body.appendChild(textarea);
-	textarea.select();
-	document.execCommand('copy');
-	textarea.remove();
-	alert('Password copied to clipboard');
+    console.log(charArray)
+
 });
 
-generate.addEventListener('click', () => {
-	const length = +lengthEl.value;
-	const hasLower = lowercaseEl.checked;
-	const hasUpper = uppercaseEl.checked;
-	const hasNumber = numbersEl.checked;
-	const hasSymbol = symbolsEl.checked;
-	
-	resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
-});
-
-function generatePassword(lower, upper, number, symbol, length) {
-	let generatedPassword = '';
-	const typesCount = lower + upper + number + symbol;
-	const typesArr = [{lower}, {upper}, {number}, {symbol}].filter(item => Object.values(item)[0]);
-	
-	// Doesn't have a selected type
-	if(typesCount === 0) {
-		return '';
-	}
-	
-	// create a loop
-	for(let i=0; i<length; i+=typesCount) {
-		typesArr.forEach(type => {
-			const funcName = Object.keys(type)[0];
-			generatedPassword += randomFunc[funcName]();
-		});
-	}
-	
-	const finalPassword = generatedPassword.slice(0, length);
-	
-	return finalPassword;
-}
-
-function getRandomLower() {
-	return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-
-function getRandomUpper() {
-	return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-}
-
-function getRandomNumber() {
-	return +String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-}
-
-function getRandomSymbol() {
-	const symbols = '!@#$%^&*(){}[]=<>/,.'
-	return symbols[Math.floor(Math.random() * symbols.length)];
-}
-
-
-
-
-
-
-
-// SOCIAL PANEL JS
-const floating_btn = document.querySelector('.floating-btn');
-const close_btn = document.querySelector('.close-btn');
-const social_panel_container = document.querySelector('.social-panel-container');
-
-floating_btn.addEventListener('click', () => {
-	social_panel_container.classList.toggle('visible')
-});
-
-close_btn.addEventListener('click', () => {
-	social_panel_container.classList.remove('visible')
-});
+function LowToHigh(low, high) {
+    const array = []
+    for (let i = low; i <= high; i++) {
+      array.push(i)
+    }
+    return array
+  }
