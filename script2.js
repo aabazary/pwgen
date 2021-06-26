@@ -10,6 +10,7 @@ const symChar = LowToHigh(33, 47).concat(
 ).concat(
   LowToHigh(123, 126)
 )
+
 // Write password to the #password input
 function writePassword() {
     var password = generatePassword();
@@ -29,20 +30,34 @@ generateBtn.addEventListener('click', function(){
 
     if (!lowBool && !capBool && !numBool && !symBool)
     alert("You must select at least one.")
+  console.log(typeof lowBool)
 
-    const choiceArray =[];
+    var choiceArray =[];
+    charArray()
     function charArray(){
      if (lowBool === true){
-        choiceArray.concat(lowChar)
-     } else if (capBool === true){
-        choiceArray.concat(capChar)
-     } else if  (numBool === true){
-        choiceArray.concat(numChar)
-     } else if (symBool === true)
-        choiceArray.concat(symChar)
+      choiceArray= choiceArray.concat(lowChar)
+     } 
+     if (capBool === true){
+      choiceArray= choiceArray.concat(capChar)
+     }  
+     if  (numBool === true){
+      choiceArray=  choiceArray.concat(numChar)
+     } 
+     if (symBool === true)
+     choiceArray=  choiceArray.concat(symChar)
     }
-
-    console.log(charArray)
+    console.log(typeof lowChar)
+    console.log(lowChar)
+    console.log(choiceArray)
+    console.log("lowBool", capBool, lowBool, numBool, symBool)
+  
+    var passwordCharacters = []
+    for (let i = 0; i < numChoice; i++) {
+      var characterCode = charCodes[Math.floor(Math.random() * charCodes.length)]
+      passwordCharacters.push(String.fromCharCode(characterCode))
+    }
+    return passwordCharacters.join('')
 
 });
 
