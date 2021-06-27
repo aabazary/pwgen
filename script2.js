@@ -22,15 +22,16 @@ generateBtn.addEventListener('click', function(){
    numChoice = parseInt(prompt("Select a value between 8 and 128"));
     if (!numChoice){
         alert("Value must be input");
+        return
     }else if  (numChoice<8 || numChoice>128)
         alert("Value needs to be between 8 and 128");
     lowBool = confirm("Do you want lowercase letters?");
-    capBool = confirm("Do you want Capital letters?");  symBool = confirm("Do you want Symbols?");
+    capBool = confirm("Do you want Capital letters?");  
+    symBool = confirm("Do you want Symbols?");
     numBool = confirm("Do you want Numbers?");
 
     if (!lowBool && !capBool && !numBool && !symBool)
     alert("You must select at least one.")
-  console.log(typeof lowBool)
 
     var choiceArray =[];
     charArray()
@@ -47,18 +48,15 @@ generateBtn.addEventListener('click', function(){
      if (symBool === true)
      choiceArray=  choiceArray.concat(symChar)
     }
-    console.log(typeof lowChar)
-    console.log(lowChar)
-    console.log(choiceArray)
-    console.log("lowBool", capBool, lowBool, numBool, symBool)
-  
-    var passwordCharacters = []
+    generatePassword()
+    function generatePassword () {
     for (let i = 0; i < numChoice; i++) {
-      var characterCode = charCodes[Math.floor(Math.random() * charCodes.length)]
+      var characterCode = choiceArray[Math.floor(Math.random() * choiceArray.length)]
       passwordCharacters.push(String.fromCharCode(characterCode))
     }
-    return passwordCharacters.join('')
-
+    console.log(choiceArray)
+    return choiceArray.join('')
+  }
 });
 
 function LowToHigh(low, high) {
