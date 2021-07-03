@@ -30,9 +30,9 @@ generateBtn.addEventListener("click", function () {
 
 
 function generatePassword() {
-    
+    //prompt starting selections
     numlength = parseInt(prompt("Type value between 8 and 128"));
-   
+   //value for typed number between 8-128, with limiters
     if (!numlength) {
         alert("Type a Value!");
     } else if (numlength < 8 || numlength > 128) {
@@ -117,7 +117,6 @@ function generatePassword() {
 
 function UserInput(pw) {
     document.getElementById("password").textContent = pw;
-
 }
 
 var copy = document.querySelector("#copy");
