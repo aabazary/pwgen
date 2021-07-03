@@ -127,6 +127,6 @@ copy.addEventListener("click", function () {
 //copy button
 function copyPassword() {
     document.getElementById("password").select();
-    document.execCommand("Copy");
+    document.execCommand("copy");
     alert("Password copied to clipboard!");
 }

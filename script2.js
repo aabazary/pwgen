@@ -1,5 +1,5 @@
 // Assignment Code
-var password = document.querySelector("#password")
+const password = document.querySelector("#password")
 var passwordCharacters = ""
 var generateBtn = document.querySelector("#generate");
 const capChar = LowToHigh(65, 90)
@@ -13,16 +13,8 @@ const symChar = LowToHigh(33, 47).concat(
   LowToHigh(123, 126)
 )
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-};
-
-generateBtn.addEventListener('click', function (event) {
-  event.preventDefault();
+generateBtn.addEventListener('click', function () {
+  passwordCharacters = ""
   numChoice = parseInt(prompt("Select a value between 8 and 128"));
   if (!numChoice) {
     alert("Value must be input");
@@ -41,43 +33,31 @@ generateBtn.addEventListener('click', function (event) {
   charArray()
 
   function charArray() {
-    if (lowBool = true) {
+    if (lowBool === true) {
       choiceArray = choiceArray.concat(lowChar)
-    } else {
-      choiceArray = choiceArray
     }
     if (capBool === true) {
       choiceArray = choiceArray.concat(capChar)
-    } else {
-      choiceArray = choiceArray
     }
     if (numBool === true) {
       choiceArray = choiceArray.concat(numChar)
-    } else {
-      choiceArray = choiceArray
-    }
+    } 
     if (symBool === true) {
       choiceArray = choiceArray.concat(symChar)
-    } else {
-      choiceArray = choiceArray
-    }
+    } 
   }
-
 
   generatePassword()
 
   function generatePassword() {
+    passwordCharacters = ""
     for (let i = 0; i < numChoice; i++) {
       var characterCode = choiceArray[Math.floor(Math.random() * choiceArray.length)]
 
       var randChar = String.fromCharCode(characterCode)
-      console.log(randChar)
       passwordCharacters = passwordCharacters + randChar
-      // console.log(passwordCharacters)
       password.textContent = passwordCharacters
     }
-    console.log(choiceArray)
-    
     return choiceArray
   }
 });
@@ -92,6 +72,9 @@ function LowToHigh(low, high) {
 
 function copyPassword() {
   password.select();
-  document.execCommand("Copy");
+  document.execCommand("copy");
   alert("Password copied to clipboard!");
-}
+} 
+
+
+
