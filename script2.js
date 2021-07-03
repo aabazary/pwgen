@@ -70,11 +70,16 @@ function LowToHigh(low, high) {
   return array
 }
 
+var copy = document.querySelector("#copy");
+copy.addEventListener("click", function () {
+    copyPassword();
+});
+
+copyPassword
 function copyPassword() {
-  password.select();
+  document.getElementById("password").select();
   document.execCommand("copy");
   alert("Password copied to clipboard!");
-} 
-
+}
 
 
